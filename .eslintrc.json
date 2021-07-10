@@ -1,7 +1,8 @@
 {
 	"env": {
 		"browser": true,
-		"es2021": true
+		"es2021": true,
+    "jest/globals": true
 	},
 	"extends": [
 		"next",
@@ -9,6 +10,7 @@
 		"plugin:react/recommended",
 		"plugin:react-hooks/recommended",
 		"plugin:react-perf/recommended",
+    "plugin:jest/recommended",
 		"airbnb"
 	],
 	"parserOptions": {
@@ -24,7 +26,8 @@
 		"import",
 		"eslint-plugin-import-helpers",
 		"react-hooks",
-		"react-perf"
+		"react-perf",
+    "jest"
 	],
 	"rules": {
 		"react/no-multi-comp": "error",
