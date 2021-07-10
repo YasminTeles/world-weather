@@ -1,16 +1,16 @@
 import Head from "next/head"
 
+import WorldMap from "../components/WorldMap"
+
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>Home Page</title>
+        <title>Word Weather</title>
       </Head>
 
       <main>
-        <h1>
-          Welcome to Home Page!
-        </h1>
+        <WorldMap />
       </main>
     </div>
   )
