@@ -1,0 +1,78 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"next",
+		"next/core-web-vitals",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:react-perf/recommended",
+		"airbnb"
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"jsx-a11y",
+		"import",
+		"eslint-plugin-import-helpers",
+		"react-hooks",
+		"react-perf"
+	],
+	"rules": {
+		"react/no-multi-comp": "error",
+		"import/no-named-as-default": "off",
+		"react/jsx-filename-extension": [
+			"error",
+			{ "extensions": [".js", ".jsx"] }
+		],
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": [
+			"error",
+			{
+				"ignore": [ "children", "classes", "className" ]
+			}
+		],
+    "react/forbid-prop-types": [
+      "error",
+      {
+        "forbid": ["any"],
+        "checkContextTypes": true
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      "error",
+      { "exceptions": ["Component"] }
+    ],
+    "semi": ["error","never"],
+    "quotes": ["error", "double"],
+    "eqeqeq": ["error", "always"],
+    "no-unused-expressions": [
+      "error",
+      { "allowTaggedTemplates": true }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^react/",
+          "module",
+          "/^@shared/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+	}
+}
