@@ -7,7 +7,7 @@ import {
   APPID,
 } from "../constants"
 
-const weatherFetch = (latitude, longitude) => axios
+const weatherFetch = ({ latitude, longitude }) => axios
   .get(OPEN_WEATHER_MAP_URL, {
     params: {
       lat: latitude,

@@ -16,8 +16,7 @@ const SearchButton = () => {
       disabled={isEmpty(coordinates)}
       onClick={useCallback(
         async () => {
-          const { latitude, longitude } = coordinates
-          const cities = await weatherFetch(latitude, longitude)
+          const cities = await weatherFetch(coordinates)
           onNewCities(cities)
         },
         [coordinates, onNewCities],
