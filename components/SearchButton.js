@@ -4,10 +4,12 @@ import Button from "@material-ui/core/Button"
 import { isEmpty } from "lodash"
 
 import useCities from "../hooks/useCities"
+import useCoordinates from "../hooks/useCoordinates"
 import weatherFetch from "../services/openWeatherMap"
 
 const SearchButton = () => {
-  const { coordinates, onNewCities } = useCities()
+  const { coordinates } = useCoordinates()
+  const { onNewCities } = useCities()
 
   return (
     <Button

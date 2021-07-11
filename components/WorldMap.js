@@ -9,7 +9,7 @@ import {
 } from "react-simple-maps"
 
 import { GEO_URL } from "../constants"
-import useCities from "../hooks/useCities"
+import useCoordinates from "../hooks/useCoordinates"
 
 const STYLE = {
   default: {
@@ -27,7 +27,7 @@ const STYLE = {
 }
 
 const WorldMap = () => {
-  const { onNewCoordinates } = useCities()
+  const { onNewCoordinates } = useCoordinates()
 
   const onClick = useCallback(
     () => {

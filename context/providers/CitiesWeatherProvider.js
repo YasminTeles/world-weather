@@ -1,6 +1,7 @@
 import {
   useMemo,
   useState,
+  useCallback,
   memo,
 } from "react"
 
@@ -11,17 +12,23 @@ const CitiesWeatherProvider = ({ children }) => {
   const [coordinates, setCoordinates] = useState({})
   const [cities, setCities] = useState([])
 
-  const onNewCoordinates = (latitude, longitude) => {
-    setCoordinates({
-      latitude,
-      longitude,
-    })
-  }
+  const onNewCoordinates = useCallback(
+    (latitude, longitude) => {
+      setCoordinates({
+        latitude,
+        longitude,
+      })
+    },
+    [],
+  )
 
-  const onNewCities = (citiesFound) => {
-    const newCities = parserCities(citiesFound)
-    setCities(newCities)
-  }
+  const onNewCities = useCallback(
+    (citiesFound) => {
+      const newCities = parserCities(citiesFound)
+      setCities(newCities)
+    },
+    [],
+  )
 
   return (
     <CitiesWeatherContext.Provider
@@ -32,7 +39,12 @@ const CitiesWeatherProvider = ({ children }) => {
           cities,
           onNewCities,
         }),
-        [cities, coordinates],
+        [
+          cities,
+          coordinates,
+          onNewCoordinates,
+          onNewCities,
+        ],
       )}
     >
       {children}
