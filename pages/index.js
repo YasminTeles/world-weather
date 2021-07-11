@@ -1,5 +1,6 @@
 import Head from "next/head"
 
+import Cities from "../components/Cities"
 import SearchButton from "../components/SearchButton"
 import WorldMap from "../components/WorldMap"
 
@@ -13,6 +14,8 @@ export default function Home() {
       <main>
         <WorldMap />
         <SearchButton />
+        <Cities />
+
       </main>
     </div>
   )
