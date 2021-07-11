@@ -2,10 +2,9 @@ import { memo } from "react"
 
 import Head from "next/head"
 
-import Cities from "../components/Cities"
 import CitySearchGrid from "../components/Grids/CitySearchGrid"
 import MainGrid from "../components/Grids/MainGrid"
-import ResultSearchGrid from "../components/Grids/ResultSearchGrid"
+import ResultSearchPreview from "../components/preview/ResultSearchPreview"
 import SearchButton from "../components/SearchButton"
 import WorldMap from "../components/WorldMap"
 
@@ -21,9 +20,7 @@ const Home = () => (
         <SearchButton />
       </CitySearchGrid>
 
-      <ResultSearchGrid>
-        <Cities />
-      </ResultSearchGrid>
+      <ResultSearchPreview />
     </MainGrid>
   </>
 )
