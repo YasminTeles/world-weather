@@ -1,12 +1,14 @@
 import { transform } from "lodash"
 
+import converterKelvinToCelsius from "./converterKelvinToCelsius"
+
 const parserCities = (cities) => transform(
   cities,
   (accumulator, value) => {
     accumulator.push({
       name: value.name,
-      temperatureMin: value.main.temp_min,
-      temperatureMax: value.main.temp_max,
+      temperatureMin: converterKelvinToCelsius(value.main.temp_min),
+      temperatureMax: converterKelvinToCelsius(value.main.temp_max),
     })
     return accumulator
   },
