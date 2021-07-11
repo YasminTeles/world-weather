@@ -1,4 +1,7 @@
-import { memo } from "react"
+import {
+  memo,
+  useCallback,
+} from "react"
 import {
   ComposableMap,
   Geographies,
@@ -6,6 +9,7 @@ import {
 } from "react-simple-maps"
 
 import { GEO_URL } from "../constants"
+import useCities from "../hooks/useCities"
 
 const STYLE = {
   default: {
@@ -13,7 +17,7 @@ const STYLE = {
     outline: "none",
   },
   hover: {
-    fill: "#F53",
+    fill: "#303f9f",
     outline: "none",
   },
   pressed: {
@@ -22,24 +26,39 @@ const STYLE = {
   },
 }
 
-const WorldMap = () => (
-  <ComposableMap data-tip="">
-    <Geographies
-      geography={GEO_URL}
+const WorldMap = () => {
+  const { onNewCoordinates } = useCities()
+
+  const onClick = useCallback(
+    () => {
+      onNewCoordinates(35, 139)
+    },
+    [onNewCoordinates],
+  )
+
+  return (
+    <ComposableMap
+      data-tip=""
     >
-      {
+      <Geographies
+        geography={GEO_URL}
+      >
+        {
         ({ geographies }) => geographies.map(
-          (geo) => (
+          (geo, proj) => (
             <Geography
               key={geo.rsmKey}
               geography={geo}
+              projection={proj}
               style={STYLE}
+              onClick={onClick}
             />
           ),
         )
       }
-    </Geographies>
-  </ComposableMap>
-)
+      </Geographies>
+    </ComposableMap>
+  )
+}
 
 export default memo(WorldMap)

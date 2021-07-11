@@ -8,7 +8,15 @@ import CitiesWeatherContext from "../CitiesWeatherContext"
 import parserCities from "../utils/parserCities"
 
 const CitiesWeatherProvider = ({ children }) => {
+  const [coordinates, setCoordinates] = useState({})
   const [cities, setCities] = useState([])
+
+  const onNewCoordinates = (latitude, longitude) => {
+    setCoordinates({
+      latitude,
+      longitude,
+    })
+  }
 
   const onNewCities = (citiesFound) => {
     const newCities = parserCities(citiesFound)
@@ -19,10 +27,12 @@ const CitiesWeatherProvider = ({ children }) => {
     <CitiesWeatherContext.Provider
       value={useMemo(
         () => ({
+          coordinates,
+          onNewCoordinates,
           cities,
           onNewCities,
         }),
-        [cities],
+        [cities, coordinates],
       )}
     >
       {children}
