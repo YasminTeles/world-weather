@@ -1,6 +1,7 @@
 import {
   memo,
   useCallback,
+  useMemo,
 } from "react"
 import {
   ComposableMap,
@@ -10,6 +11,11 @@ import {
 
 import { GEO_URL } from "../constants"
 import useCoordinates from "../hooks/useCoordinates"
+import {
+  getCoordinatesCapital,
+  getCountryOfSouthAmerica,
+} from "../utils"
+import Markers from "./Markers"
 
 const STYLE = {
   default: {
@@ -30,33 +36,46 @@ const WorldMap = () => {
   const { onNewCoordinates } = useCoordinates()
 
   const onClick = useCallback(
-    () => {
-      onNewCoordinates(35, 139)
+    (country) => () => {
+      const { latitude, longitude } = getCoordinatesCapital(country.NAME)
+
+      onNewCoordinates(latitude, longitude)
     },
     [onNewCoordinates],
   )
 
   return (
     <ComposableMap
-      data-tip=""
+      projection="geoAzimuthalEqualArea"
+      projectionConfig={useMemo(
+        () => ({
+          rotate: [58, 20, 0],
+          scale: 400,
+        }),
+        [],
+      )}
     >
       <Geographies
         geography={GEO_URL}
       >
         {
-        ({ geographies }) => geographies.map(
-          (geo, proj) => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              projection={proj}
-              style={STYLE}
-              onClick={onClick}
-            />
-          ),
-        )
+        ({ geographies }) => geographies
+          .filter(getCountryOfSouthAmerica)
+          .map(
+            (geo, proj) => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                projection={proj}
+                style={STYLE}
+                onClick={onClick(geo.properties)}
+              />
+            ),
+          )
       }
       </Geographies>
+
+      <Markers />
     </ComposableMap>
   )
 }
